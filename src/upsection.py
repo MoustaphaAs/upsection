@@ -75,8 +75,13 @@ def get_repository(name):
 
 
 def initialize_app():
-    with open('config.yml') as fd:
-        config = yaml.safe_load(fd)
+    try:
+        with open('config.yml') as fd:
+            config = yaml.safe_load(fd)
+    except FileNotFoundError:
+        print("config.yml is not found.")
+        print("Please consult the documentation : https://agora.nasqueron.org/Static_sites")
+        sys.exit(1)
 
     return {
         'config': config,
